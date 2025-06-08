@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>桌游分数排名系统 | yu130-yy</title>
+  <title>桌游分数排名系统</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script>
@@ -11,8 +11,8 @@
       theme: {
         extend: {
           colors: {
-            primary: '#0F3460', // 主色（深蓝）
-            accent: '#FFC107', // 强调色（黄）
+            primary: '#0F3460', // 深蓝色
+            accent: '#FFC107', // 黄色
             dark: '#1A1A2E',
             light: '#F5F5F5',
           },
@@ -34,224 +34,500 @@
       .btn-accent {
         @apply bg-accent text-primary px-4 py-2 rounded-md hover:bg-accent/90 transition-all duration-200;
       }
+      .badge {
+        @apply px-2 py-1 rounded-full text-xs font-medium;
+      }
+      .input-focus {
+        @apply focus:outline-none focus:ring-2 focus:ring-primary/50;
+      }
     }
   </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800 min-h-screen flex flex-col">
-  <!-- 导航栏 -->
-  <header class="bg-primary text-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <i class="fa fa-dice text-accent text-2xl"></i>
-        <h1 class="text-xl font-bold">桌游分数排名</h1>
-      </div>
-      
-      <nav class="hidden md:flex items-center space-x-6">
-        <a href="#home" class="hover:text-accent transition-colors duration-200">首页</a>
-        <a href="#games" class="hover:text-accent transition-colors duration-200">桌游类型</a>
-        <a href="#messages" class="hover:text-accent transition-colors duration-200">待认证</a>
-        <a href="#profile" class="hover:text-accent transition-colors duration-200">我的资料</a>
-      </nav>
-      
-      <div class="flex items-center space-x-4">
-        <div class="relative">
-          <img src="https://picsum.photos/id/64/200/200" alt="玩家头像" class="w-10 h-10 rounded-full object-cover border-2 border-accent cursor-pointer">
-          <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-primary"></span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- 主内容 -->
-  <main class="flex-grow container mx-auto px-4 py-8">
-    <!-- 首页：桌游排名 -->
-    <section id="home" class="mb-12">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h2 class="text-2xl font-bold text-primary mb-4 md:mb-0">当前桌游排名</h2>
-        <button id="add-record-btn" class="btn-primary flex items-center">
-          <i class="fa fa-plus mr-2"></i> 新增对局记录
-        </button>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- 策略类桌游排名 -->
-        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold text-primary flex items-center">
-              <img src="https://picsum.photos/id/26/40/40" alt="策略类" class="w-8 h-8 rounded mr-2"> 策略类
-            </h3>
-            <span class="text-sm text-gray-500">12场记录</span>
-          </div>
-
-          <div class="space-y-3">
-            <div class="flex items-center p-3 rounded-lg bg-gray-50">
-              <span class="w-6 h-6 flex items-center justify-center bg-accent text-primary rounded-full font-bold mr-3">1</span>
-              <img src="https://picsum.photos/id/64/40/40" alt="玩家A" class="w-10 h-10 rounded-full object-cover mr-3">
-              <div class="flex-grow">
-                <p class="font-medium">玩家A</p>
-                <p class="text-sm text-gray-500">最近：《卡坦岛》</p>
-              </div>
-              <p class="text-right font-bold text-primary">320分</p>
-            </div>
-            <div class="flex items-center p-3 rounded-lg bg-gray-50">
-              <span class="w-6 h-6 flex items-center justify-center bg-gray-300 text-primary rounded-full font-bold mr-3">2</span>
-              <img src="https://picsum.photos/id/65/40/40" alt="玩家B" class="w-10 h-10 rounded-full object-cover mr-3">
-              <div class="flex-grow">
-                <p class="font-medium">玩家B</p>
-                <p class="text-sm text-gray-500">最近：《诡镇奇谈》</p>
-              </div>
-              <p class="text-right font-bold text-primary">285分</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 聚会类桌游排名 -->
-        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold text-primary flex items-center">
-              <img src="https://picsum.photos/id/28/40/40" alt="聚会类" class="w-8 h-8 rounded mr-2"> 聚会类
-            </h3>
-            <span class="text-sm text-gray-500">8场记录</span>
-          </div>
-
-          <div class="space-y-3">
-            <div class="flex items-center p-3 rounded-lg bg-gray-50">
-              <span class="w-6 h-6 flex items-center justify-center bg-accent text-primary rounded-full font-bold mr-3">1</span>
-              <img src="https://picsum.photos/id/68/40/40" alt="玩家E" class="w-10 h-10 rounded-full object-cover mr-3">
-              <div class="flex-grow">
-                <p class="font-medium">玩家E</p>
-                <p class="text-sm text-gray-500">最近：《德国心脏病》</p>
-              </div>
-              <p class="text-right font-bold text-primary">190分</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 桌游类型管理 -->
-    <section id="games" class="mb-12">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h2 class="text-2xl font-bold text-primary mb-4 md:mb-0">桌游类型管理</h2>
-        <button id="add-type-btn" class="btn-accent flex items-center">
-          <i class="fa fa-plus mr-2"></i> 新增类型
-        </button>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-          <img src="https://picsum.photos/id/26/400/200" alt="策略类" class="w-full h-40 object-cover">
-          <div class="p-5">
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="text-lg font-bold text-primary">策略类</h3>
-              <button class="text-gray-500 hover:text-primary transition-colors">
-                <i class="fa fa-pencil"></i> 编辑
-              </button>
-            </div>
-            <p class="text-gray-600 text-sm mb-4">包含《卡坦岛》《诡镇奇谈》等策略对抗类桌游</p>
-            <div class="text-xs text-gray-500">创建于：2024-01-01</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 消息中心：待认证终局 -->
-    <section id="messages" class="mb-12">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h2 class="text-2xl font-bold text-primary mb-4 md:mb-0">待认证的终局</h2>
-      </div>
-
-      <div class="space-y-4">
-        <div class="bg-white rounded-xl shadow-md p-5 card-hover">
-          <div class="flex items-start justify-between mb-3">
-            <div class="flex items-center">
-              <img src="https://picsum.photos/id/64/40/40" alt="玩家A" class="w-10 h-10 rounded-full object-cover mr-3">
-              <div>
-                <h4 class="font-medium">《璀璨宝石》终局认证</h4>
-                <p class="text-sm text-gray-500">2小时前提交</p>
-              </div>
-            </div>
-            <span class="badge bg-red-100 text-red-600">待认证</span>
-          </div>
-
-          <div class="bg-gray-50 rounded-lg p-4 mb-4">
-            <p class="text-sm text-gray-600">玩家A: 35分 | 玩家B: 28分 | 玩家C: 22分</p>
-            <div class="flex items-center justify-between mt-2">
-              <div class="flex -space-x-2">
-                <img src="https://picsum.photos/id/64/30/30" alt="玩家A" class="w-8 h-8 rounded-full border-2 border-white">
-                <img src="https://picsum.photos/id/65/30/30" alt="玩家B" class="w-8 h-8 rounded-full border-2 border-white">
-                <img src="https://picsum.photos/id/66/30/30" alt="玩家C" class="w-8 h-8 rounded-full border-2 border-white">
-              </div>
-              <span class="text-xs text-gray-500">策略类</span>
-            </div>
-          </div>
-
-          <div class="flex justify-end space-x-3">
-            <button class="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100">拒绝</button>
-            <button class="px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90">批准</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- 新增对局记录模态框 -->
-  <div id="add-record-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+  <!-- 登录/注册模态框 -->
+  <div id="auth-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
       <div class="p-6 border-b border-gray-200">
         <div class="flex justify-between items-center">
-          <h3 class="text-xl font-bold text-primary">新增对局记录</h3>
-          <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+          <h3 id="auth-title" class="text-xl font-bold text-primary">登录</h3>
+          <button id="close-auth-modal" class="text-gray-500 hover:text-gray-700">
             <i class="fa fa-times text-xl"></i>
           </button>
         </div>
       </div>
 
       <div class="p-6">
-        <form>
+        <!-- 登录表单 -->
+        <form id="login-form">
           <div class="mb-4">
-            <label class="block text-gray-700 font-medium mb-2" for="game-name">桌游名称</label>
-            <input type="text" id="game-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary">
+            <label class="block text-gray-700 font-medium mb-2" for="login-username">
+              用户名
+            </label>
+            <input type="text" id="login-username" class="w-full px-4 py-2 border border-gray-300 rounded-md input-focus" placeholder="输入用户名" value="1">
           </div>
 
           <div class="mb-4">
-            <label class="block text-gray-700 font-medium mb-2" for="game-type">桌游类型</label>
-            <select id="game-type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary">
-              <option value="strategy">策略类</option>
-              <option value="party">聚会类</option>
-              <option value="coop">合作类</option>
-            </select>
+            <label class="block text-gray-700 font-medium mb-2" for="login-password">
+              密码
+            </label>
+            <input type="password" id="login-password" class="w-full px-4 py-2 border border-gray-300 rounded-md input-focus" placeholder="输入密码" value="1234">
           </div>
 
-          <div class="mb-4">
-            <label class="block text-gray-700 font-medium mb-2">参与玩家</label>
-            <div class="flex flex-wrap gap-2">
-              <input type="text" placeholder="玩家A" class="px-3 py-1 border rounded-md flex-grow">
-              <input type="text" placeholder="玩家B" class="px-3 py-1 border rounded-md flex-grow">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center">
+              <input type="checkbox" id="remember-me" class="mr-2">
+              <label for="remember-me" class="text-gray-600 text-sm">记住我</label>
             </div>
+            <a href="#" class="text-primary hover:text-primary/80 text-sm">忘记密码?</a>
           </div>
 
-          <div class="mt-6">
-            <button type="submit" class="btn-primary w-full">提交记录</button>
+          <button type="submit" class="btn-primary w-full mb-4">
+            <i class="fa fa-sign-in mr-2"></i> 登录
+          </button>
+          
+          <div class="text-center">
+            <span class="text-gray-600">还没有账号? </span>
+            <button type="button" id="switch-to-register" class="text-primary hover:text-primary/80">立即注册</button>
+          </div>
+        </form>
+
+        <!-- 注册表单 (默认隐藏) -->
+        <form id="register-form" class="hidden">
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="register-username">
+              用户名
+            </label>
+            <input type="text" id="register-username" class="w-full px-4 py-2 border border-gray-300 rounded-md input-focus" placeholder="创建用户名">
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="register-email">
+              邮箱
+            </label>
+            <input type="email" id="register-email" class="w-full px-4 py-2 border border-gray-300 rounded-md input-focus" placeholder="输入邮箱">
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="register-password">
+              密码
+            </label>
+            <input type="password" id="register-password" class="w-full px-4 py-2 border border-gray-300 rounded-md input-focus" placeholder="创建密码">
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2" for="register-confirm-password">
+              确认密码
+            </label>
+            <input type="password" id="register-confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-md input-focus" placeholder="再次输入密码">
+          </div>
+
+          <button type="submit" class="btn-accent w-full mb-4">
+            <i class="fa fa-user-plus mr-2"></i> 注册
+          </button>
+          
+          <div class="text-center">
+            <span class="text-gray-600">已有账号? </span>
+            <button type="button" id="switch-to-login" class="text-primary hover:text-primary/80">返回登录</button>
           </div>
         </form>
       </div>
     </div>
+  </div>
+
+  <!-- 导航栏 -->
+  <header class="bg-primary text-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-dice text-accent text-2xl"></i>
+        <h1 class="text-xl font-bold">桌游分数排名系统</h1>
+      </div>
+      
+      <nav id="main-nav" class="hidden md:flex items-center space-x-6">
+        <a href="#home" class="hover:text-accent transition-colors duration-200">首页</a>
+        <a href="#games" class="hover:text-accent transition-colors duration-200">桌游类型</a>
+        <a href="#messages" class="hover:text-accent transition-colors duration-200">
+          消息
+          <span id="message-count" class="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 ml-1">0</span>
+        </a>
+        <a href="#profile" class="hover:text-accent transition-colors duration-200">个人资料</a>
+      </nav>
+      
+      <div class="flex items-center space-x-4">
+        <button id="mobile-menu-btn" class="md:hidden text-2xl">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div id="auth-buttons" class="flex items-center space-x-2">
+          <button id="login-btn" class="px-4 py-2 rounded-md hover:bg-white/10 transition-all duration-200">登录</button>
+          <button id="register-btn" class="bg-accent text-primary px-4 py-2 rounded-md hover:bg-accent/90 transition-all duration-200">注册</button>
+        </div>
+        <div id="user-profile" class="hidden relative">
+          <img id="user-avatar" src="https://picsum.photos/id/64/200/200" alt="用户头像" class="w-10 h-10 rounded-full object-cover border-2 border-accent cursor-pointer">
+          <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-primary"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <!-- 首页 - 桌游排名 -->
+    <section id="home" class="mb-12">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4 md:mb-0">桌游分数排名</h2>
+        <button id="add-work-btn" class="btn-primary flex items-center hidden">
+          <i class="fa fa-plus mr-2"></i> 新增桌游记录
+        </button>
+      </div>
+
+      <!-- 未登录提示 -->
+      <div id="not-logged-in" class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-user-lock text-gray-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">请先登录</h3>
+        <p class="text-gray-600 mb-6">登录后可以查看和管理你的桌游排名</p>
+        <button id="login-prompt-btn" class="btn-primary">
+          <i class="fa fa-sign-in mr-2"></i> 立即登录
+        </button>
+      </div>
+
+      <!-- 空状态提示 -->
+      <div id="no-ranking" class="bg-white rounded-xl shadow-md p-8 text-center card-hover hidden">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-trophy text-gray-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">暂无排名数据</h3>
+        <p class="text-gray-600 mb-6">添加你的第一场桌游记录，开始建立排名系统</p>
+        <button id="add-first-work-btn" class="btn-primary">
+          <i class="fa fa-plus mr-2"></i> 添加首场桌游
+        </button>
+      </div>
+
+      <!-- 排名列表 -->
+      <div id="ranking-list" class="space-y-8 hidden"></div>
+    </section>
+
+      <!-- 桌游类型管理 -->
+      <section id="games" class="mb-12">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+          <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4 md:mb-0">桌游类型与游戏库</h2>
+          <button id="add-game-type-btn" class="btn-accent flex items-center">
+          <i class="fa fa-plus mr-2"></i> 新增桌游类型
+          </button>
+      </div>
+
+      <!-- 桌游类型与游戏展示 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 动态生成类型卡片（含该类型下的游戏） -->
+          <div id="game-types-container" class="space-y-6"></div>
+      </div>
+      </section>
+
+      <!-- 未登录提示 -->
+      <div id="not-logged-in-games" class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-user-lock text-gray-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">请先登录</h3>
+        <p class="text-gray-600 mb-6">登录后可以管理你的桌游类型</p>
+        <button id="login-prompt-games-btn" class="btn-primary">
+          <i class="fa fa-sign-in mr-2"></i> 立即登录
+        </button>
+      </div>
+
+      <!-- 空状态提示 -->
+      <div id="no-game-types" class="bg-white rounded-xl shadow-md p-8 text-center card-hover hidden">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-dice text-gray-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">暂无桌游类型</h3>
+        <p class="text-gray-600 mb-6">创建你的第一个桌游类别，开始分类管理游戏</p>
+        <button id="add-first-type-btn" class="btn-accent">
+          <i class="fa fa-plus mr-2"></i> 添加桌游类型
+        </button>
+      </div>
+
+      <!-- 桌游类型列表 -->
+      <div id="game-types-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+    </section>
+
+    <!-- 消息中心 - 待审批工作 -->
+    <section id="messages" class="mb-12">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4 md:mb-0">待审批的桌游记录</h2>
+        <div class="flex space-x-2 mt-2 md:mt-0">
+          <button id="filter-pending" class="px-3 py-1 bg-primary text-white rounded-md">未审批</button>
+          <button id="filter-all" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md">全部</button>
+        </div>
+      </div>
+
+      <!-- 未登录提示 -->
+      <div id="not-logged-in-messages" class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-user-lock text-gray-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">请先登录</h3>
+        <p class="text-gray-600 mb-6">登录后可以查看你的消息</p>
+        <button id="login-prompt-messages-btn" class="btn-primary">
+          <i class="fa fa-sign-in mr-2"></i> 立即登录
+        </button>
+      </div>
+
+      <!-- 空状态提示 -->
+      <div id="no-messages" class="bg-white rounded-xl shadow-md p-8 text-center card-hover hidden">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-check-circle text-gray-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">暂无待审批的桌游记录</h3>
+        <p class="text-gray-600 mb-6">所有桌游记录均已审批通过</p>
+      </div>
+
+      <!-- 消息列表 -->
+      <div id="messages-list" class="space-y-4 hidden"></div>
+    </section>
+
+    <!-- 个人资料 -->
+    <section id="profile" class="mb-12">
+      <div id="profile-not-logged-in" class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-user-lock text-gray-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">请先登录</h3>
+        <p class="text-gray-600 mb-6">登录后可以查看和编辑你的个人资料</p>
+        <button id="login-prompt-profile-btn" class="btn-primary">
+          <i class="fa fa-sign-in mr-2"></i> 立即登录
+        </button>
+      </div>
+
+      <div id="profile-content" class="bg-white rounded-xl shadow-md overflow-hidden hidden">
+        <div class="h-40 bg-gradient-to-r from-primary to-dark relative">
+          <button class="absolute bottom-4 right-4 bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+            <i class="fa fa-camera mr-1"></i> 更换封面
+          </button>
+        </div>
+
+        <div class="px-6 pb-6 -mt-16">
+          <div class="flex flex-col md:flex-row items-center">
+            <div class="relative mb-4 md:mb-0">
+              <img id="profile-avatar" src="https://picsum.photos/id/64/200/200" alt="玩家头像" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg">
+              <button id="change-avatar-btn" class="absolute bottom-0 right-0 bg-accent text-primary rounded-full w-8 h-8 flex items-center justify-center">
+                <i class="fa fa-camera"></i>
+              </button>
+            </div>
+
+            <div class="flex-grow ml-0 md:ml-6 text-center md:text-left">
+              <div class="flex items-center justify-center md:justify-start mb-2">
+                <h2 id="username-display" class="text-2xl font-bold text-primary mr-2">玩家A</h2>
+                <button id="edit-profile-btn" class="text-primary hover:text-primary/80">
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </div>
+              <p class="text-gray-600 mb-2">桌游爱好者</p>
+              <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
+                <span class="badge bg-primary/10 text-primary">总积分: <span id="total-score">0</span></span>
+                <span class="badge bg-gray-100 text-gray-700">参与<span id="games-played">0</span>场桌游</span>
+                <span class="badge bg-gray-100 text-gray-700">加入日期: <span id="join-date">2024-01-01</span></span>
+              </div>
+              <button id="logout-btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-all duration-200">
+                <i class="fa fa-sign-out mr-2"></i> 退出登录
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <script>
-    // 模态框交互
-    const addRecordBtn = document.getElementById('add-record-btn');
-    const addRecordModal = document.getElementById('add-record-modal');
-    const closeModal = document.getElementById('close-modal');
+  <!-- 新增桌游记录模态框 -->
+  <div id="add-work-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-bold text-primary">新增桌游记录</h3>
+          <button id="close-work-modal" class="text-gray-500 hover:text-gray-700">
+            <i class="fa fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
 
-    addRecordBtn.addEventListener('click', () => {
-      addRecordModal.classList.remove('hidden');
-    });
+      <div class="p-6">
+        <form id="add-work-form">
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="work-name">
+              桌游名称
+            </label>
+            <input type="text" id="work-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary" placeholder="输入桌游名称">
+          </div>
 
-    closeModal.addEventListener('click', () => {
-      addRecordModal.classList.add('hidden');
-    });
-  </script>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="work-type">
+              桌游类型
+            </label>
+            <select id="work-type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary">
+              <option value="">请选择类型</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">
+              上传桌游图片
+            </label>
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+              <input type="file" id="work-image" class="hidden">
+              <label for="work-image" class="cursor-pointer">
+                <i class="fa fa-cloud-upload text-gray-400 text-3xl mb-2"></i>
+                <p class="text-gray-600">点击上传图片或拖拽到此处</p>
+                <p class="text-xs text-gray-500 mt-1">支持 JPG, PNG, GIF 格式</p>
+              </label>
+              <div id="image-preview" class="mt-4 hidden">
+                <img id="preview-img" src="" alt="预览图" class="w-full h-40 object-cover rounded-md">
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">
+              桌游描述
+            </label>
+            <textarea id="work-description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary resize-none" placeholder="描述游戏过程和结果..."></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">
+              参与玩家 (至少2名)
+            </label>
+            <div id="work-players-container" class="space-y-2">
+              <div class="flex items-center">
+                <input type="text" placeholder="玩家1" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary">
+                <input type="number" min="1" max="10" placeholder="分数" class="w-20 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary ml-2">
+                <button type="button" class="remove-player-btn ml-2 text-gray-500 hover:text-gray-700">
+                  <i class="fa fa-minus-circle"></i>
+                </button>
+              </div>
+              <div class="flex items-center">
+                <input type="text" placeholder="玩家2" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary">
+                <input type="number" min="1" max="10" placeholder="分数" class="w-20 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary ml-2">
+                <button type="button" id="add-work-player-btn" class="ml-2 text-primary hover:text-primary/80">
+                  <i class="fa fa-plus-circle"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <button type="submit" class="btn-primary w-full">
+              <i class="fa fa-save mr-2"></i> 提交记录
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增桌游类型模态框 -->
+  <div id="add-type-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-bold text-primary">新增桌游类型</h3>
+          <button id="close-type-modal" class="text-gray-500 hover:text-gray-700">
+            <i class="fa fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="p-6">
+        <form id="add-type-form">
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="type-name">
+              类型名称
+            </label>
+            <input type="text" id="type-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary" placeholder="例如：策略类">
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">
+              上传类型封面图
+            </label>
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+              <input type="file" id="type-image" class="hidden">
+              <label for="type-image" class="cursor-pointer">
+                <i class="fa fa-cloud-upload text-gray-400 text-3xl mb-2"></i>
+                <p class="text-gray-600">点击上传图片或拖拽到此处</p>
+                <p class="text-xs text-gray-500 mt-1">支持 JPG, PNG, GIF 格式</p>
+              </label>
+              <div id="type-image-preview" class="mt-4 hidden">
+                <img id="type-preview-img" src="" alt="预览图" class="w-full h-40 object-cover rounded-md">
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="type-description">
+              类型描述
+            </label>
+            <textarea id="type-description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary" placeholder="描述此类桌游的特点..."></textarea>
+          </div>
+
+          <div class="mt-6">
+            <button type="submit" class="btn-accent w-full">
+              <i class="fa fa-save mr-2"></i> 保存类型
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 编辑个人资料模态框 -->
+  <div id="edit-profile-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-bold text-primary">编辑个人资料</h3>
+          <button id="close-edit-profile-modal" class="text-gray-500 hover:text-gray-700">
+            <i class="fa fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="p-6">
+        <form id="edit-profile-form">
+          <div class="mb-4 text-center">
+            <div class="relative inline-block">
+              <img id="edit-avatar-preview" src="https://picsum.photos/id/64/200/200" alt="用户头像" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg">
+              <button type="button" id="edit-avatar-btn" class="absolute bottom-0 right-0 bg-accent text-primary rounded-full w-8 h-8 flex items-center justify-center">
+                <i class="fa fa-camera"></i>
+              </button>
+              <input type="file" id="edit-avatar-input" class="hidden">
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="edit-username">
+              用户名
+            </label>
+            <input type="text" id="edit-username" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary" placeholder="输入用户名">
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="edit-bio">
+              个人简介
+            </label>
+            <textarea id="edit-bio" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary" placeholder="介绍一下你自己..."></textarea>
+          </div>
+
+          <div class="mt-6">
+            <button type="submit" class="btn-primary w-full">
+              <i class="fa fa-save mr-2"></i> 保存资料
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入外部 JavaScript 文件 -->
+  <script src="script.js"></script>
 </body>
 </html>
